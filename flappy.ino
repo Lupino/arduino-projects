@@ -90,10 +90,10 @@ TouchScreen ts = TouchScreen(XP, YP, XM, YM, 300);
 
 // instead of using TFT.width() and TFT.height() set constant values
 // (we can change the size of the game easily that way)
-#define TFTW            128     // screen width
-#define TFTH            160     // screen height
-#define TFTW2            64     // half screen width
-#define TFTH2            80     // half screen height
+#define TFTW            240     // screen width
+#define TFTH            320     // screen height
+#define TFTW2           120     // half screen width
+#define TFTH2           160     // half screen height
 // #define TFTW            240     // screen width
 // #define TFTH            320     // screen height
 // #define TFTW2            120     // half screen width
@@ -106,16 +106,16 @@ TouchScreen ts = TouchScreen(XP, YP, XM, YM, 300);
 #define MAX_FRAMESKIP     5
 // bird size
 #define BIRDW             8     // bird width
-#define BIRDH             8     // bird height
+#define BIRDH             8    // bird height
 #define BIRDW2            4     // half width
-#define BIRDH2            4     // half height
+#define BIRDH2            8     // half height
 // pipe size
-#define PIPEW            12     // pipe width
-#define GAPHEIGHT        36     // pipe gap height
+#define PIPEW            24     // pipe width
+#define GAPHEIGHT        72     // pipe gap height
 // floor size
-#define FLOORH           20     // floor height (from bottom of the screen)
+#define FLOORH           40     // floor height (from bottom of the screen)
 // grass size
-#define GRASSH            4     // grass height (inside floor, starts at floor y)
+#define GRASSH            8     // grass height (inside floor, starts at floor y)
 
 // background
 const unsigned int BCKGRDCOL = TFT.Color565(138,235,244);
@@ -153,13 +153,13 @@ static unsigned int birdcol[] =
 
 // bird structure
 static struct BIRD {
-  unsigned char x, y, old_y;
+  unsigned int x, y, old_y;
   unsigned int col;
   float vel_y;
 } bird;
 // pipe structure
 static struct PIPE {
-  char x, gap_y;
+  int x, gap_y;
   unsigned int col;
 } pipe;
 
@@ -206,7 +206,7 @@ void game_loop() {
   // draw floor
   // ===============
   // instead of calculating the distance of the floor from the screen height each time store it in a variable
-  unsigned char GAMEH = TFTH - FLOORH;
+  unsigned int GAMEH = TFTH - FLOORH;
   // draw the floor once, we will not overwrite on this area in-game
   // black line
   TFT.drawFastHLine(0, GAMEH, TFTW, BLACK);
@@ -214,11 +214,11 @@ void game_loop() {
   TFT.fillRect(0, GAMEH+1, TFTW2, GRASSH, GRASSCOL);
   TFT.fillRect(TFTW2, GAMEH+1, TFTW2, GRASSH, GRASSCOL2);
   // black line
-  TFT.drawFastHLine(0, GAMEH+GRASSH, TFTW, BLACK);
+  TFT.drawFastHLine(0, GAMEH+GRASSH, TFTW, RED);
   // mud
   TFT.fillRect(0, GAMEH+GRASSH+1, TFTW, FLOORH-GRASSH, FLOORCOL);
   // grass x position (for stripe animation)
-  char grassx = TFTW;
+  int grassx = TFTW;
   // game loop time variables
   double delta, old_time, next_game_tick, current_time;
   next_game_tick = current_time = millis();
@@ -226,7 +226,7 @@ void game_loop() {
   // passed pipe flag to count score
   bool passed_pipe = false;
   // temp var for setAddrWindow
-  unsigned char px;
+  unsigned int px;
 
   while (1) {
     loops = 0;
