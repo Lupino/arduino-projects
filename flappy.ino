@@ -297,6 +297,8 @@ void game_loop() {
     }
     // erase behind pipe
     if (pipe.x <= TFTW) TFT.drawFastVLine(pipe.x+PIPEW, 0, GAMEH, BCKGRDCOL);
+    if (pipe.x <= TFTW) TFT.drawFastVLine(pipe.x+PIPEW+1, 0, GAMEH, BCKGRDCOL);
+    if (pipe.x <= TFTW) TFT.drawFastVLine(pipe.x+PIPEW+2, 0, GAMEH, BCKGRDCOL);
 
     // bird
     // ---------------
