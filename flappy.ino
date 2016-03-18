@@ -284,14 +284,25 @@ void game_loop() {
       TFT.drawFastVLine(pipe.x+3, 0, pipe.gap_y, PIPECOL);
       TFT.drawFastVLine(pipe.x+3, pipe.gap_y+GAPHEIGHT+1, GAMEH-(pipe.gap_y+GAPHEIGHT+1), PIPECOL);
       // highlight
+      TFT.drawFastVLine(pipe.x+2, 0, pipe.gap_y, PIPECOL);
+      TFT.drawFastVLine(pipe.x+2, pipe.gap_y+GAPHEIGHT+1, GAMEH-(pipe.gap_y+GAPHEIGHT+1), PIPECOL);
+      TFT.drawFastVLine(pipe.x+1, 0, pipe.gap_y, PIPEHIGHCOL);
+      TFT.drawFastVLine(pipe.x+1, pipe.gap_y+GAPHEIGHT+1, GAMEH-(pipe.gap_y+GAPHEIGHT+1), PIPEHIGHCOL);
+
       TFT.drawFastVLine(pipe.x, 0, pipe.gap_y, PIPEHIGHCOL);
       TFT.drawFastVLine(pipe.x, pipe.gap_y+GAPHEIGHT+1, GAMEH-(pipe.gap_y+GAPHEIGHT+1), PIPEHIGHCOL);
       // bottom and top border of pipe
       drawPixel(pipe.x, pipe.gap_y, PIPESEAMCOL);
       drawPixel(pipe.x, pipe.gap_y+GAPHEIGHT, PIPESEAMCOL);
+      drawPixel(pipe.x+1, pipe.gap_y, PIPESEAMCOL);
+      drawPixel(pipe.x+1, pipe.gap_y+GAPHEIGHT, PIPESEAMCOL);
       // pipe seam
       drawPixel(pipe.x, pipe.gap_y-6, PIPESEAMCOL);
       drawPixel(pipe.x, pipe.gap_y+GAPHEIGHT+6, PIPESEAMCOL);
+      drawPixel(pipe.x+1, pipe.gap_y-6, PIPESEAMCOL);
+      drawPixel(pipe.x+1, pipe.gap_y+GAPHEIGHT+6, PIPESEAMCOL);
+      drawPixel(pipe.x+2, pipe.gap_y-6, PIPESEAMCOL);
+      drawPixel(pipe.x+2, pipe.gap_y+GAPHEIGHT+6, PIPESEAMCOL);
       drawPixel(pipe.x+3, pipe.gap_y-6, PIPESEAMCOL);
       drawPixel(pipe.x+3, pipe.gap_y+GAPHEIGHT+6, PIPESEAMCOL);
     }
