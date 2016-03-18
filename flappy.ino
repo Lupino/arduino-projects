@@ -432,7 +432,7 @@ void game_over() {
   TFT.print("score: ");
   TFT.print(score);
   TFT.setCursor( TFTW2 - (12*3), TFTH2 + 12);
-  TFT.println("press button");
+  TFT.println("Touch Screen");
   while (1) {
     digitalWrite(13, HIGH);
     TSPoint p = ts.getPoint();
