@@ -4,17 +4,16 @@
 // ---------------------------
 // by Themistokle "mrt-prodz" Benetatos
 //
-// This is a Flappy Bird clone made for the ATMEGA328 and a Sainsmart 1.8" TFT
-// screen (ST7735). It features an intro screen, a game over screen containing
+// This is a Flappy Bird clone made for the ATMEGA328 and a Sainsmart 2.6" TFT
+// screen (TFT2802201). It features an intro screen, a game over screen containing
 // the player score and a similar gameplay from the original game.
 //
-// Developed and tested with an Arduino UNO and a Sainsmart 1.8" TFT screen.
-//
-// TODO: - debounce button ?
+// Developed and tested with an Arduino UNO and a Sainsmart 2.6" TFT screen.
 //
 // Dependencies:
 // - https://github.com/adafruit/Adafruit-GFX-Library
-// - https://github.com/adafruit/Adafruit-ST7735-Library
+// - https://github.com/adafruit/TFTLCD-Library
+// - https://github.com/adafruit/Touch-Screen-Library
 //
 // References:
 // - http://www.tweaking4all.com/hardware/arduino/sainsmart-arduino-color-display/
@@ -68,17 +67,12 @@
 Adafruit_TFTLCD TFT(LCD_CS, LCD_CD, LCD_WR, LCD_RD, LCD_RESET);
 // If using the shield, all control and data lines are fixed, and
 // a simpler declaration can optionally be used:
-// Adafruit_TFTLCD tft;
+// Adafruit_TFTLCD TFT;
 
 #define YP A3  // must be an analog pin, use "An" notation!
 #define XM A2  // must be an analog pin, use "An" notation!
 #define YM 9   // can be a digital pin
 #define XP 8   // can be a digital pin
-
-#define TS_MINX 220
-#define TS_MINY 220
-#define TS_MAXX 920
-#define TS_MAXY 940
 
 #define MINPRESSURE 10
 #define MAXPRESSURE 1000
@@ -94,11 +88,7 @@ TouchScreen ts = TouchScreen(XP, YP, XM, YM, 300);
 #define TFTH            320     // screen height
 #define TFTW2           120     // half screen width
 #define TFTH2           160     // half screen height
-// #define TFTW            240     // screen width
-// #define TFTH            320     // screen height
-// #define TFTW2            120     // half screen width
-// #define TFTH2            160     // half screen height
-// game constant
+
 #define SPEED             1
 #define GRAVITY         9.8
 #define JUMP_FORCE     2.15
@@ -171,7 +161,6 @@ static short tmpx, tmpy;
 // ---------------
 // draw pixel
 // ---------------
-// faster drawPixel method by inlining calls and using setAddrWindow and pushColor
 // using macro to force inlining
 #define drawPixel(a, b, c) TFT.drawPixel(a, b, c)
 
